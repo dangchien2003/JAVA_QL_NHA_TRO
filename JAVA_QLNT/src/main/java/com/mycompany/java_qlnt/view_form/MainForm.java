@@ -25,6 +25,7 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
+    private String name = "";
     private JLabel labelClick;
     public MainForm() {
         initComponents();
@@ -117,7 +118,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(48, 40, 40));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Quản lý thiết bị");
+        jLabel8.setText("Quản lý hợp đồng");
         jLabel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 MouseMoved_Menu(evt);

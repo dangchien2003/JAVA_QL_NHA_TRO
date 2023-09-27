@@ -74,7 +74,7 @@ public class Helper {
     }
     
     
-    public int edit(String query, Statement stmt) {
+    private int edit(String query, Statement stmt) {
         try {
             int rowsAffected = stmt.executeUpdate(query);
             return rowsAffected;
@@ -97,7 +97,7 @@ public class Helper {
     }
     
     
-    public ResultSet select(String query, Statement stmt) {
+    private ResultSet select(String query, Statement stmt) {
         try {
             ResultSet rs = stmt.executeQuery(query);
             return rs;

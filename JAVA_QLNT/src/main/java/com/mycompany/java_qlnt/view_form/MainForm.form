@@ -136,7 +136,7 @@
           <Color blue="28" green="28" red="30" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; thi&#x1ebf;t b&#x1ecb;"/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; h&#x1ee3;p &#x111;&#x1ed3;ng"/>
       </Properties>
       <Events>
         <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="MouseMoved_Menu"/>
