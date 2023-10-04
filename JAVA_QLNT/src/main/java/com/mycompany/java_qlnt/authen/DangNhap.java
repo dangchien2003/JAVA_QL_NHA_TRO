@@ -5,12 +5,9 @@
 package com.mycompany.java_qlnt.authen;
 
 import com.mycompany.java_qlnt.helper.Helper;
-import com.mycompany.java_qlnt.view_form.MainForm;
-import java.awt.Color;
+import com.mycompany.java_qlnt.main.MainForm;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -25,7 +22,6 @@ public class DangNhap extends javax.swing.JFrame {
      */
     public DangNhap() {
         initComponents();
-            
         String imagePath = "src\\main\\java\\com\\mycompany\\java_qlnt\\icon\\privacy.jpeg";
         jLabel1.setIcon(new ImageIcon(imagePath));
     }
@@ -53,6 +49,7 @@ public class DangNhap extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Đăng nhập");
         setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setBackground(new java.awt.Color(255, 51, 51));
@@ -66,7 +63,7 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel4.setText("Username");
 
         user.setText("a");
-        user.setActionCommand(null);
+        user.setActionCommand("null");
         user.setBorder(null);
         user.setOpaque(true);
 

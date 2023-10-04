@@ -44,7 +44,7 @@ CREATE TABLE [ThongTinHopDong] (
   [giaVeSinh] int,
   [giaXe] int,
   [thoiGianBatDau] date,
-  [thoiGianHieuLuc] date,
+  [thoiGianHieuLuc] INT,
   [file] varchar(255)
 )
 GO

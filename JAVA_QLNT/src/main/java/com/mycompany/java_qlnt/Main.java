@@ -5,7 +5,6 @@
 package com.mycompany.java_qlnt;
 import com.mycompany.java_qlnt.authen.DangNhap;
 import com.mycompany.java_qlnt.helper.Helper;
-import com.mycompany.java_qlnt.view_form.MainForm;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
