@@ -10,16 +10,18 @@ import java.awt.Color;
  *
  * @author chien
  */
-public class TinhTrang extends javax.swing.JPanel {
+public class Phong extends javax.swing.JPanel {
 
     /**
      * Creates new form TinhTrang
      */
-    public TinhTrang(String tenP, String tinhTrang) {
+    public Phong(String tenP, String tinhTrang) {
         initComponents();
         this.tenPhong = tenP;
         this.tinhTrangPhong = tinhTrang;
+        setItem();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,6 +34,12 @@ public class TinhTrang extends javax.swing.JPanel {
 
         TenPhong = new javax.swing.JLabel();
         TinhTrangHienTai = new javax.swing.JLabel();
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickRoom(evt);
+            }
+        });
 
         TenPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         TenPhong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -61,6 +69,12 @@ public class TinhTrang extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void clickRoom(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickRoom
+        // TODO add your handling code here:
+        System.out.println(tenPhong); 
+        System.out.println(tinhTrangPhong); 
+    }//GEN-LAST:event_clickRoom
     private String tenPhong = "";
     private String tinhTrangPhong = "";
     
@@ -68,10 +82,11 @@ public class TinhTrang extends javax.swing.JPanel {
         TenPhong.setText(tenPhong);
         TinhTrangHienTai.setText(tinhTrangPhong);
         switch(tinhTrangPhong.toLowerCase()) {
-            case "đang sử dụng" -> this.setBackground(Color.RED);
+            case "đang sử dụng" -> this.setBackground(new Color(255, 102, 102));
             case "phòng trống" -> this.setBackground(Color.GREEN);
-            case "đã cọc" -> this.setBackground(Color.YELLOW);
+            case "đang cọc" -> this.setBackground(Color.YELLOW);
             case "sắp hết hợp đồng" -> this.setBackground(Color.ORANGE);
+            default->this.setBackground(Color.MAGENTA);
         }
         
     }

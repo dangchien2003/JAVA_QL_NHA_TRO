@@ -5,13 +5,16 @@
 package com.mycompany.java_qlnt.QLPhong;
 
 import com.mycompany.java_qlnt.helper.Helper;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
@@ -38,6 +41,7 @@ public class MenuQLP extends javax.swing.JPanel {
         imageIcon = new ImageIcon(imagePath);
         jLabel6.setIcon(imageIcon);
         
+
     }
 
     /**
@@ -250,8 +254,18 @@ public class MenuQLP extends javax.swing.JPanel {
         // TODO add your handling code here:
         jPanel6.setBackground(new Color(204, 204, 204));
         jPanel3.setBackground(new Color(214, 217, 223));
+        TinhTrangPhong panel = new TinhTrangPhong();
+        showJPanel(panel);
     }//GEN-LAST:event_TinhTrangPhong_Click
-
+    
+    private void showJPanel(JPanel childpanel) {
+        jPanel4.setLayout(new BorderLayout());
+        jPanel4.removeAll();
+        jPanel4.add(childpanel);
+        jPanel4.validate();
+    }
+//j4 468
+//1157
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

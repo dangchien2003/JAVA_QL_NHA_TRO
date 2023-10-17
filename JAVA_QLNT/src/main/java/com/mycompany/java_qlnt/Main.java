@@ -5,6 +5,7 @@
 package com.mycompany.java_qlnt;
 import com.mycompany.java_qlnt.authen.DangNhap;
 import com.mycompany.java_qlnt.helper.Helper;
+import com.mycompany.java_qlnt.main.MainForm;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -42,7 +43,9 @@ public class Main {
     
     
     public static void main(String[] args) {
-        DangNhap mainform = new DangNhap();
+//        DangNhap mainform = new DangNhap();
+//        mainform.main(args);
+        MainForm mainform = new MainForm();
         mainform.main(args);
     }
 }

@@ -4,8 +4,11 @@
  */
 package com.mycompany.java_qlnt.QLPhong;
 
+import com.mycompany.java_qlnt.helper.Helper;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.sql.ResultSet;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,11 +19,10 @@ public class TinhTrangPhong extends javax.swing.JPanel {
     /**
      * Creates new form TinhTrangPhong
      */
-//    public TinhTrangPhong(ResultSet result) {
-//        initComponents();
-//        this.tenPhong = tenP;
-//        this.tinhTrangPhong = tinhTrang;
-//    }
+    public TinhTrangPhong() {
+        initComponents();
+        showListRoom();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,36 +32,29 @@ public class TinhTrangPhong extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        jPanel1 = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
     }// </editor-fold>//GEN-END:initComponents
-    private String tenPhong = "";
-    private String tinhTrangPhong = "";
+
     
-//    public void setItem() {
-//        TenPhong.setText(tenPhong);
-//        TinhTrangHienTai.setText(tinhTrangPhong);
-//        switch(tinhTrangPhong.toLowerCase()) {
-//            case "đang sử dụng" -> this.setBackground(Color.RED);
-//            case "phòng trống" -> this.setBackground(Color.GREEN);
-//            case "đã cọc" -> this.setBackground(Color.YELLOW);
-//            case "sắp hết hợp đồng" -> this.setBackground(Color.ORANGE);
-//        }
-//        
-//    }
+    private void showListRoom() {
+        System.out.println("TinhTrangPhong");
+        ResultSet DSPhong = GetRoom();
+        ListPhong listPhong = new ListPhong(DSPhong);
+        ShowList(listPhong);
+    }
+    
+    private ResultSet GetRoom () {
+        String sql = "select maPhong, tinhTrang from PhongTro";
+        Helper helper = new Helper();
+        ResultSet DSPhong = helper.select(sql);
+        return DSPhong;
+    }
+    
+     private void ShowList(JPanel childpanel) {
+        this.setLayout(new FlowLayout());
+        this.add(childpanel);
+        this.validate();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
