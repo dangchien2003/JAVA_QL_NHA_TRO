@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -49,7 +50,8 @@ public class ListPhong extends javax.swing.JPanel {
     private void showList() {
         int tang = 1;
         int count = 0;
-        
+//        int max = 0;
+//        ArrayList<Integer> soPhongMoiTang = new ArrayList<>();
         try {
             while(listRoom.next()) {
                 String maPhong = listRoom.getString("maPhong");
@@ -57,6 +59,18 @@ public class ListPhong extends javax.swing.JPanel {
                 if(maPhong.charAt(1) - '0' == tang) {
                     ++count;
                 }
+                //xử lý in theo từng tầng(Khó lm sau
+//                    soPhongMoiTang.add(0,count);
+//                    for (int i = 0; i < soPhongMoiTang.size(); i++) {
+//                        if(count > soPhongMoiTang.get()) {
+//                            max = count;
+//                            int num = count - soPhongMoiTang.get(1);
+//                            
+//                        }
+//                    }
+//                    
+//                    count = 0;
+//                }
                 Phong phong = new Phong(maPhong, tinhTrang);
                 addPhong(phong);
             }
