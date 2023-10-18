@@ -85,7 +85,7 @@ public final class Phong extends javax.swing.JPanel {
         if(tenPhong.charAt(0) == 'A' || tenPhong.charAt(0) == 'a') {
             
         }else {
-            Action action = new Action(tenPhong);
+            Action action = new Action(tenPhong, tinhTrangPhong);
             action.setVisible(true);
         }
     }//GEN-LAST:event_clickRoom
