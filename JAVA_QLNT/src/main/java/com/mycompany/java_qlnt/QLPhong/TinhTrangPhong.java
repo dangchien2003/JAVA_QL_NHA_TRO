@@ -27,6 +27,7 @@ public class TinhTrangPhong extends javax.swing.JPanel {
         initComponents();
         jPanel1.removeAll();
         showListRoom();
+        
     }
 
     /**

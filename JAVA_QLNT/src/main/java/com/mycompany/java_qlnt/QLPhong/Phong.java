@@ -4,7 +4,10 @@
  */
 package com.mycompany.java_qlnt.QLPhong;
 
+import com.mycompany.java_qlnt.QLPhong.ActionRoom.Action;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
 
 /**
  *
@@ -23,6 +26,7 @@ public final class Phong extends javax.swing.JPanel {
         this.tenPhong = tenP;
         this.tinhTrangPhong = tinhTrang;
         setItem();
+        
     }
     
 
@@ -72,11 +76,18 @@ public final class Phong extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void clickRoom(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickRoom
         // TODO add your handling code here:
+        
         System.out.println(tenPhong); 
         System.out.println(tinhTrangPhong); 
+        if(tenPhong.charAt(0) == 'A' || tenPhong.charAt(0) == 'a') {
+            
+        }else {
+            Action action = new Action(tenPhong);
+            action.setVisible(true);
+        }
     }//GEN-LAST:event_clickRoom
     private String tenPhong = "";
     private String tinhTrangPhong = "";
