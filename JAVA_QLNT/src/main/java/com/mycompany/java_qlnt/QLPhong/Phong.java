@@ -10,13 +10,16 @@ import java.awt.Color;
  *
  * @author chien
  */
-public class Phong extends javax.swing.JPanel {
+public final class Phong extends javax.swing.JPanel {
 
     /**
      * Creates new form TinhTrang
+     * @param tenP
+     * @param tinhTrang
      */
     public Phong(String tenP, String tinhTrang) {
         initComponents();
+        
         this.tenPhong = tenP;
         this.tinhTrangPhong = tinhTrang;
         setItem();
