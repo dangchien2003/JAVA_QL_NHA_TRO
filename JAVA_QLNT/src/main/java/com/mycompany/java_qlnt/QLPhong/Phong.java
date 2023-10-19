@@ -20,9 +20,9 @@ public final class Phong extends javax.swing.JPanel {
      * @param tenP
      * @param tinhTrang
      */
-    public Phong(String tenP, String tinhTrang) {
+    public Phong(String tenP, String tinhTrang, int soNguoi) {
         initComponents();
-        
+        this.soNguoi = soNguoi;
         this.tenPhong = tenP;
         this.tinhTrangPhong = tinhTrang;
         setItem();
@@ -85,12 +85,13 @@ public final class Phong extends javax.swing.JPanel {
         if(tenPhong.charAt(0) == 'A' || tenPhong.charAt(0) == 'a') {
             
         }else {
-            Action action = new Action(tenPhong, tinhTrangPhong);
+            Action action = new Action(tenPhong, tinhTrangPhong, soNguoi);
             action.setVisible(true);
         }
     }//GEN-LAST:event_clickRoom
     private String tenPhong = "";
     private String tinhTrangPhong = "";
+    private int soNguoi = 0;
     
     public void setItem() {
         TenPhong.setText(tenPhong);

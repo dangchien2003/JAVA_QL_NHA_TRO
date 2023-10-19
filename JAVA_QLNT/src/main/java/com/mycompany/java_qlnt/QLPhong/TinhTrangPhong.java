@@ -68,6 +68,7 @@ public class TinhTrangPhong extends javax.swing.JPanel {
                 String maPhong = DSPhong.getString("maPhong");
                 String tinhTrang = DSPhong.getString("tinhTrang");
                 int tangHT = DSPhong.getInt("tang");
+                int soNguoi = DSPhong.getInt("soNguoiO");
                 // sang tầng khác
                 if(tangHT != tmp) {
                     listTang.add(tang);
@@ -75,7 +76,7 @@ public class TinhTrangPhong extends javax.swing.JPanel {
                     tang = new Tang();
                 }
                 // vẫn ở tầng
-                phong = new Phong(maPhong, tinhTrang);
+                phong = new Phong(maPhong, tinhTrang, soNguoi);
                 tang.addPhong(phong);
             }
             listTang.add(tang);
@@ -91,7 +92,7 @@ public class TinhTrangPhong extends javax.swing.JPanel {
     }
     
     private ResultSet GetRoom () {
-        String sql = "select maPhong, tinhTrang, tang from PhongTro order by tang";
+        String sql = "select maPhong, tinhTrang, tang, soNguoiO from PhongTro order by tang";
         Helper helper = new Helper();
         ResultSet DSPhong = helper.select(sql);
         return DSPhong;

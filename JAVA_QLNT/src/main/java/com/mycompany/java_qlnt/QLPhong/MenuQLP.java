@@ -40,8 +40,6 @@ public class MenuQLP extends javax.swing.JPanel {
         imagePath = "src\\main\\java\\com\\mycompany\\java_qlnt\\icon\\statusRoom.png";
         imageIcon = new ImageIcon(imagePath);
         jLabel6.setIcon(imageIcon);
-        
-
     }
 
     /**
