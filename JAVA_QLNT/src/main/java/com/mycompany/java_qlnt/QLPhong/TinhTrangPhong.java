@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -69,6 +70,7 @@ public class TinhTrangPhong extends javax.swing.JPanel {
                 String tinhTrang = DSPhong.getString("tinhTrang");
                 int tangHT = DSPhong.getInt("tang");
                 int soNguoi = DSPhong.getInt("soNguoiO");
+                int soLuongXe = DSPhong.getInt("soXe");
                 // sang tầng khác
                 if(tangHT != tmp) {
                     listTang.add(tang);
@@ -76,10 +78,11 @@ public class TinhTrangPhong extends javax.swing.JPanel {
                     tang = new Tang();
                 }
                 // vẫn ở tầng
-                phong = new Phong(maPhong, tinhTrang, soNguoi);
+                phong = new Phong(maPhong, tinhTrang, soNguoi, soLuongXe);
                 tang.addPhong(phong);
             }
             listTang.add(tang);
+            
             for (int i = 0; i < listTang.size(); i++) {
                 listTang.get(i).Show();
                 addPanel(listTang.get(i));
@@ -92,13 +95,18 @@ public class TinhTrangPhong extends javax.swing.JPanel {
     }
     
     private ResultSet GetRoom () {
-        String sql = "select maPhong, tinhTrang, tang, soNguoiO from PhongTro order by tang";
+        String sql = "select maPhong, tinhTrang, tang, soNguoiO, soXe from PhongTro order by tang";
         Helper helper = new Helper();
         ResultSet DSPhong = helper.select(sql);
         return DSPhong;
     }
     
-     private void addPanel(JPanel childpanel) {
+    private void addPanel(JPanel childpanel) {
+//        SwingUtilities.invokeLater(() -> {
+//            jPanel1.add(childpanel);
+//            jPanel1.revalidate(); // Cập nhật lại giao diện
+//            jPanel1.repaint();
+//        });
         jPanel1.add(childpanel);
     }
     

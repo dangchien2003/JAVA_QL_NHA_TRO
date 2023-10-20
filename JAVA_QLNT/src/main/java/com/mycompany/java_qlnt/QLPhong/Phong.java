@@ -7,7 +7,10 @@ package com.mycompany.java_qlnt.QLPhong;
 import com.mycompany.java_qlnt.QLPhong.ActionRoom.Action;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import static javafx.scene.paint.Color.color;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -20,13 +23,17 @@ public final class Phong extends javax.swing.JPanel {
      * @param tenP
      * @param tinhTrang
      */
-    public Phong(String tenP, String tinhTrang, int soNguoi) {
+    public Phong(String tenP, String tinhTrang, int soNguoi, int soLuongXe) {
         initComponents();
-        this.soNguoi = soNguoi;
         this.tenPhong = tenP;
-        this.tinhTrangPhong = tinhTrang;
+        setSoNguoi(soNguoi);
+        setTinhTrang(tinhTrang);
+        setLuongXe(soLuongXe);
         setItem();
-        
+    }
+
+    public Phong() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 
@@ -85,24 +92,49 @@ public final class Phong extends javax.swing.JPanel {
         if(tenPhong.charAt(0) == 'A' || tenPhong.charAt(0) == 'a') {
             
         }else {
-            Action action = new Action(tenPhong, tinhTrangPhong, soNguoi);
+//            Action action = new Action(tenPhong, tinhTrangPhong, soNguoi, soLuongXe);
+            Action action = new Action(Phong.this , tenPhong, tinhTrangPhong, soNguoi, soLuongXe);
             action.setVisible(true);
         }
     }//GEN-LAST:event_clickRoom
     private String tenPhong = "";
     private String tinhTrangPhong = "";
     private int soNguoi = 0;
+    private int soLuongXe = 0;
+    
+    public void setLuongXe(int _luongXe) {
+        this.soLuongXe = _luongXe;
+    }
+    public void setSoNguoi(int _soNguoi) {
+        this.soNguoi = _soNguoi;
+    }
+    public void setTinhTrang(String _tinhTrang) {
+        this.tinhTrangPhong = _tinhTrang;
+//        setItem();
+    }
     
     public void setItem() {
         TenPhong.setText(tenPhong);
         TinhTrangHienTai.setText(tinhTrangPhong);
+        Color bg;
+        System.out.println(tinhTrangPhong); 
         switch(tinhTrangPhong.toLowerCase()) {
-            case "đang sử dụng" -> this.setBackground(new Color(255, 102, 102));
-            case "phòng trống" -> this.setBackground(Color.GREEN);
-            case "đang cọc" -> this.setBackground(Color.YELLOW);
-            case "sắp hết hợp đồng" -> this.setBackground(Color.ORANGE);
-            default->this.setBackground(Color.MAGENTA);
+            
+//            case "đang sử dụng" -> this.setBackground();
+            case "đang sử dụng" -> bg = new Color(255, 102, 102);
+//            case "phòng trống" -> this.setBackground(Color.GREEN);
+            case "phòng trống" -> bg = new Color(0, 255, 0);
+//            case "đang cọc" -> this.setBackground(Color.YELLOW);
+            case "đang cọc" -> bg = new Color(0, 255, 0);
+//            case "sắp hết hợp đồng" -> this.setBackground(Color.ORANGE);
+            case "sắp hết hợp đồng" -> bg = new Color(255, 200, 0);
+//            default->this.setBackground(Color.MAGENTA);
+            default->bg = new Color(255, 0, 255);
         }
+//        SwingUtilities.invokeLater(() -> {
+//            this.setBackground(bg);
+//        });
+        this.setBackground(bg);
         
     }
 
