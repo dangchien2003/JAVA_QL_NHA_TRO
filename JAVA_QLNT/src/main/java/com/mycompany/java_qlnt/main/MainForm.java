@@ -8,6 +8,7 @@ package com.mycompany.java_qlnt.main;
 
 
 
+import com.microsoft.sqlserver.jdbc.dataclassification.Label;
 import com.mycompany.java_qlnt.QLPhong.MenuQLP;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -244,11 +245,16 @@ public class MainForm extends javax.swing.JFrame {
             if(e != labelClick)
                 e.setForeground(new Color(48, 40, 40));
         });
+        
+        if(labelClick == jLabel1) {
+            showJPanel(new MenuQLP());
+        }
+        
     }//GEN-LAST:event_mouseClick_Menu
 
     //mặc định mở đầu hiển thị menuQLP
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        showJPanel(new MenuQLP());
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**
