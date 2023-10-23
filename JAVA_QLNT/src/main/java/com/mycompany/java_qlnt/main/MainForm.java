@@ -16,7 +16,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import qlkhach_tro.qlkhach_tro;
 /**
  *
  * @author chien
@@ -43,7 +43,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -77,17 +77,17 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setBackground(new java.awt.Color(240, 240, 240));
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(48, 40, 40));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Quản lý khách trọ");
-        jLabel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jLabel16.setBackground(new java.awt.Color(240, 240, 240));
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(48, 40, 40));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Quản lý khách trọ");
+        jLabel16.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 MouseMoved_Menu(evt);
             }
         });
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mouseClick_Menu(evt);
             }
@@ -163,7 +163,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -178,7 +178,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,7 +236,7 @@ public class MainForm extends javax.swing.JFrame {
         // thêm label vào array list
         ArrayList<JLabel> listJlabel = new ArrayList<>();
         listJlabel.add(jLabel1);
-        listJlabel.add(jLabel6);
+        listJlabel.add(jLabel16);
         listJlabel.add(jLabel7);
         listJlabel.add(jLabel8);
         listJlabel.add(jLabel10);
@@ -248,6 +248,8 @@ public class MainForm extends javax.swing.JFrame {
         
         if(labelClick == jLabel1) {
             showJPanel(new MenuQLP());
+        } else if(labelClick == jLabel16){
+             showJPanel(new qlkhach_tro());
         }
         
     }//GEN-LAST:event_mouseClick_Menu
@@ -295,7 +297,7 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel panel;
