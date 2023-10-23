@@ -3,7 +3,9 @@
  */
 
 package com.mycompany.java_qlnt;
+import com.mycompany.java_qlnt.authen.DangNhap;
 import com.mycompany.java_qlnt.helper.Helper;
+import com.mycompany.java_qlnt.main.MainForm;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -12,8 +14,10 @@ import java.util.logging.Logger;
  *
  * @author chien
  */
+
+
 public class Main {
-    public static void main(String[] args) {
+    void test() {
         Helper helper = new Helper();
 //        Object rs = helper.query("insert into test(test) values (2)");
         Object rs = helper.query("select * from test");
@@ -34,5 +38,14 @@ public class Main {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+}
+
+    
+    
+    public static void main(String[] args) {
+//        DangNhap mainform = new DangNhap();
+//        mainform.main(args);
+        MainForm mainform = new MainForm();
+        mainform.main(args);
     }
 }

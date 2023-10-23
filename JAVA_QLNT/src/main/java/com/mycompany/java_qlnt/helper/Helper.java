@@ -12,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.CallableStatement;
+import java.sql.Types;
 
 /**
  *
@@ -74,7 +76,7 @@ public class Helper {
     }
     
     
-    public int edit(String query, Statement stmt) {
+    private int edit(String query, Statement stmt) {
         try {
             int rowsAffected = stmt.executeUpdate(query);
             return rowsAffected;
@@ -91,13 +93,15 @@ public class Helper {
             int rowsAffected = stmt.executeUpdate(query);
             return rowsAffected;
         } catch (SQLException ex) {
+            
+            System.out.println(ex); 
             return 0;
         }
         
     }
     
     
-    public ResultSet select(String query, Statement stmt) {
+    private ResultSet select(String query, Statement stmt) {
         try {
             ResultSet rs = stmt.executeQuery(query);
             return rs;
@@ -133,4 +137,33 @@ public class Helper {
             return null;
         }
     } 
+    
+//    public boolean update(String nameProcedure) {
+//        boolean query = false;
+//        try {
+//            Connection conn = getConnection();
+//            CallableStatement callableStatement = conn.prepareCall("{call "+nameProcedure+"()}");
+//
+//            // Đặt giá trị cho tham số đầu vào
+//            callableStatement.setInt(1, 5);
+//            callableStatement.setInt(2, 4);
+//
+//            // Đăng ký tham số đầu ra
+//            callableStatement.registerOutParameter(1, Types.INTEGER);
+//
+//            // Thực hiện stored procedure
+//            callableStatement.execute();
+//
+//            // Lấy giá trị trả về từ stored procedure
+//            int result = callableStatement.getInt(1);
+//            System.out.println("Kết quả từ stored procedure: " + result);
+//
+//            // Đóng các tài nguyên
+//            callableStatement.close();
+//            conn.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return query;
+//    }
 }
