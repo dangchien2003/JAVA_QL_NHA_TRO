@@ -6,6 +6,7 @@ package com.mycompany.java_qlnt.QLPhong.ActionRoom;
 
 import com.mycompany.java_qlnt.QLPhong.Phong;
 import com.mycompany.java_qlnt.helper.Helper;
+import com.mycompany.java_qlnt.helper.util;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -56,7 +57,9 @@ public class Action extends javax.swing.JFrame {
     
     private String maPhong = "";
     private String tinhTrangP = "";
-    private Phong room;
+    private final Phong room;
+    private final util util = new util();
+
     private final Helper help = new Helper();
     ArrayList<Object> inputs = new ArrayList<>();
     private void AddListInputs() {
@@ -167,34 +170,35 @@ public class Action extends javax.swing.JFrame {
     
     private void loadCustomer() {
         ResultSet info = getCustomer();
-        // lấy số cột của table
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        int columnCount = model.getColumnCount();
-        try {
-            while (info.next()) {
-                Object[] rowData = new Object[columnCount];
-                for (int i = 1; i <= columnCount; i++) {
-                    rowData[i - 1] = info.getObject(i);
-                }
-                model.addRow(rowData);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        util.loadDataToTable(info, jTable1);
     }
     
     private void deleteDataRoom() {
         int choice = jOptionPane1.showConfirmDialog(null, "Xác nhận xoá dữ liệu của "+ maPhong, "Confirmation", jOptionPane1.YES_NO_OPTION);
         jOptionPane1.setVisible(true);
+        int edit = 0;
         if (choice == jOptionPane1.YES_OPTION) {
-            deleteDataRoom("ALL");
+            edit = deleteDataRoom("ALL");
             loadCustomer();
         } else {
-            deleteDataRoom("TT");
+            edit = deleteDataRoom("TT");
         }
-        soLuong.setValue(0);
         jOptionPane1.setVisible(false);
+        if(edit == 1) {
+            jOptionPane1.showMessageDialog(null, "Cập nhật thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            
+            
+            soLuong.setValue(0);
+        }
+        
+        
+        
+    }
+    
+    private void setMethodPerSon(Map<String, String> values) {
+        room.setTinhTrang(values.get("tinhTrang"));
+        room.setSoNguoi(Integer.parseInt(values.get("soLuong")));
+        room.setLuongXe(Integer.parseInt(values.get("luongXe")));
     }
     
     @SuppressWarnings("unchecked")
@@ -269,7 +273,7 @@ public class Action extends javax.swing.JFrame {
 
         jLabel1.setText("Tình trạng: ");
 
-        tinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phòng trống", "Đang sử dụng", "Đang cọc" }));
+        tinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phòng trống", "Đang sử dụng", "Đang cọc", "Sắp hết hợp đồng" }));
         tinhTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChonTinhTrang(evt);
@@ -386,7 +390,7 @@ public class Action extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(66, 66, 66)
+                                .addGap(45, 45, 45)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(88, 88, 88))
                             .addGroup(layout.createSequentialGroup()
@@ -414,7 +418,7 @@ public class Action extends javax.swing.JFrame {
                                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(18, 18, 18))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(23, 23, 23)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(queQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -566,32 +570,32 @@ public class Action extends javax.swing.JFrame {
                     "WHEN NOT MATCHED THEN " +
                     "    insert (maPhong, hoTen, namSinh, sdt, soCCCD, bienSoXe, tenXe, queQuan) "
                     + "values (source.maPhong, source.hoTen, source.namSinh, source.sdt, source.soCCCD, source.bienSoXe, source.tenXe, source.queQuan); ";
+                    sql += " update phongTro set soNguoiO = "+values.get("soLuong")+" , tinhTrang = N'"+values.get("tinhTrang")+"', soXe = "+values.get("luongXe")+" where maPhong ='"+maPhong+"';";
             }else {
                 jOptionPane1.showMessageDialog(null, "Nhập thông tin CCCD", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
-            sql += "update phongTro set soNguoiO = "+values.get("soLuong")+" , tinhTrang = N'"+values.get("tinhTrang")+"', soXe = "+values.get("luongXe")+" where maPhong ='"+maPhong+"';";
+            
             int result = help.edit(sql);
             if(result == 1) {
                 loadCustomer();
-                room.setTinhTrang(values.get("tinhTrang"));
-                room.setSoNguoi(Integer.parseInt(values.get("soLuong")));
-                room.setLuongXe(Integer.parseInt(values.get("luongXe")));
+                jOptionPane1.showMessageDialog(null, "Cập nhật thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                setMethodPerSon(values);
             } 
         }
         else if(tinhTrangPhong.toLowerCase().equals("đang cọc")) {
             deleteDataRoom();
-            room.setTinhTrang(values.get("tinhTrang"));
-            room.setSoNguoi(Integer.parseInt(values.get("soLuong")));
-            room.setLuongXe(Integer.parseInt(values.get("luongXe")));
+            setMethodPerSon(values);
         }
         else if(tinhTrangPhong.toLowerCase().equals("phòng trống")) {
             deleteDataRoom();
+            setMethodPerSon(values);
+        }else if(tinhTrangPhong.toLowerCase().equals("sắp hết hợp đồng")) {
+            String sql = "update PhongTro set tinhTrang = '"+values.get("tinhTrang")+"' where maPhong = '"+maPhong+"'";
             room.setTinhTrang(values.get("tinhTrang"));
-            room.setSoNguoi(Integer.parseInt(values.get("soLuong")));
-            room.setLuongXe(Integer.parseInt(values.get("luongXe")));
         }
     }//GEN-LAST:event_SaveInfoRoom
 
+    
     private void DeletePerson(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePerson
         // TODO add your handling code here:
         String cccd = this.cccd.getText();

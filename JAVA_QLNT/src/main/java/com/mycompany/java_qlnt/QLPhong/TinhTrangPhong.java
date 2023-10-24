@@ -28,7 +28,6 @@ public class TinhTrangPhong extends javax.swing.JPanel {
         initComponents();
         jPanel1.removeAll();
         showListRoom();
-        
     }
 
     /**
@@ -41,6 +40,8 @@ public class TinhTrangPhong extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+
+        setMaximumSize(new java.awt.Dimension(1304, 468));
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
 
@@ -102,11 +103,6 @@ public class TinhTrangPhong extends javax.swing.JPanel {
     }
     
     private void addPanel(JPanel childpanel) {
-//        SwingUtilities.invokeLater(() -> {
-//            jPanel1.add(childpanel);
-//            jPanel1.revalidate(); // Cập nhật lại giao diện
-//            jPanel1.repaint();
-//        });
         jPanel1.add(childpanel);
     }
     
