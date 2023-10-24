@@ -9,6 +9,7 @@ package com.mycompany.java_qlnt.main;
 
 
 import com.microsoft.sqlserver.jdbc.dataclassification.Label;
+import com.mycompany.java_qlnt.QLHoaDon.QuanLiHoaDon;
 import com.mycompany.java_qlnt.QLPhong.MenuQLP;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -249,8 +250,11 @@ public class MainForm extends javax.swing.JFrame {
         
         if(labelClick == jLabel1) {
             showJPanel(new MenuQLP());
+
         } else if(labelClick == jLabel16){
              showJPanel(new qlkhach_tro());
+        }else if(labelClick == jLabel7) {
+            showJPanel(new QuanLiHoaDon());
         }
         
     }//GEN-LAST:event_mouseClick_Menu

@@ -329,16 +329,16 @@ public class qlkhach_tro extends javax.swing.JPanel {
                try{
                     db = getConnect();
                     if(db!=null){
-                        String sql = "INSERT INTO dbo.ThongTinNguoiO VALUE()?,?,?,?,?,?,?,?";
+                        String sql = "INSERT INTO dbo.ThongTinNguoiO VALUE(?,?,?,?,?,?,?,?)";
                         PreparedStatement pst = db.prepareStatement(sql);
-                        pst.setString(1, ma_phong.getText());
-                        pst.setString(2, ho_ten.getText());
-                        pst.setInt(3, Integer.valueOf(nam_sinh.getText()));
-                        pst.setString(4, sdt.getText());
-                        pst.setString(5, cccd.getText());
-                        pst.setString(6, bien_so_xe.getText());
-                        pst.setString(7, ten_xe.getText());
-                        pst.setString(8, que.getText());
+                        pst.setString(0, ma_phong.getText());
+                        pst.setString(1, ho_ten.getText());
+                        pst.setInt(2, Integer.valueOf(nam_sinh.getText()));
+                        pst.setString(3, sdt.getText());
+                        pst.setString(4, cccd.getText());
+                        pst.setString(5, bien_so_xe.getText());
+                        pst.setString(6, ten_xe.getText());
+                        pst.setString(7, que.getText());
                         
                         int rowsInserted = pst.executeUpdate();
                 
@@ -354,15 +354,15 @@ public class qlkhach_tro extends javax.swing.JPanel {
                 // TODO add your handling code here:
         DefaultTableModel modal = (DefaultTableModel) hien_thi.getModel();
         int myIndex = hien_thi.getSelectedRow();
-        tableID = Integer.valueOf(modal.getValueAt(myIndex, 0).toString());
-        ma_phong.setText(modal.getValueAt(myIndex, 1).toString());
-        ho_ten.setText(modal.getValueAt(myIndex, 2).toString());
-        nam_sinh.setText(modal.getValueAt(myIndex, 3).toString());
-        sdt.setText(modal.getValueAt(myIndex, 4).toString());
-        cccd.setText(modal.getValueAt(myIndex, 5).toString());
-        bien_so_xe.setText(modal.getValueAt(myIndex, 6).toString());
-        ten_xe.setText(modal.getValueAt(myIndex, 7).toString());
-        que.setText(modal.getValueAt(myIndex, 8).toString());
+       /* tableID = Integer.valueOf(modal.getValueAt(myIndex, 0).toString());*/
+        ma_phong.setText(modal.getValueAt(myIndex, 0).toString());
+        ho_ten.setText(modal.getValueAt(myIndex, 1).toString());
+        nam_sinh.setText(modal.getValueAt(myIndex, 2).toString());
+        sdt.setText(modal.getValueAt(myIndex, 3).toString());
+        cccd.setText(modal.getValueAt(myIndex, 4).toString());
+        bien_so_xe.setText(modal.getValueAt(myIndex, 5).toString());
+        ten_xe.setText(modal.getValueAt(myIndex, 6).toString());
+        que.setText(modal.getValueAt(myIndex, 7).toString());
     }//GEN-LAST:event_hien_thiMouseClicked
 
     private void suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaActionPerformed
@@ -373,7 +373,8 @@ public class qlkhach_tro extends javax.swing.JPanel {
                try{
                     db = getConnect();
                     if(db!=null){
-                        String sql = "UPDATE dbo.ThongTinNguoiO SET ma_phong = ?, ho_ten=?, nam_sinh=?, sdt=?, cccd=?, bien_so_xe=?, ten_xe=?, que=?";
+                        String sql = "UPDATE dbo.ThongTinNguoiO SET maPhong = ?, hoTen=?, namSinh=?, sdt=?,soCCCD=?, bienSoXe=?, tenXe=?, queQuan=?";
+                    
                         PreparedStatement pst = db.prepareStatement(sql);
                         pst.setString(1, ma_phong.getText());
                         pst.setString(2, ho_ten.getText());
@@ -385,7 +386,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
                         pst.setString(8, que.getText());
                         
                          int rowsInserted = pst.executeUpdate();
-
+                         System.out.println("sql"+sql);
                     JOptionPane.showMessageDialog(this, "Updated ThongTinNguoiO");
                 
                 } else {
