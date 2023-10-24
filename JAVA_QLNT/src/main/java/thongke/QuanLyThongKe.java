@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package thongke;
-
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +16,7 @@ public class QuanLyThongKe extends javax.swing.JPanel {
      */
     public QuanLyThongKe() {
         initComponents();
+        addChild(new TKDoanhThu());
     }
 
     /**
@@ -34,19 +32,15 @@ public class QuanLyThongKe extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1303, 468));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1303, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
-        );
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê doanh số", "Thống kê hoá đơn", "Thống kê hợp đồng", "thống kê phòng" }));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê doanh số", "Thống kê hoá đơn", "Thống kê phòng" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,7 +63,26 @@ public class QuanLyThongKe extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+         String selectedItem = (String) jComboBox1.getSelectedItem();
+         if(selectedItem.equals("Thống kê doanh số")) {
+            addChild(new TKDoanhThu());
+         }
+         else if(selectedItem.equals("Thống kê hoá đơn")) {
+            addChild(new TKHoaDon());
 
+         }
+         else if(selectedItem.equals("Thống kê phòng")) {
+             addChild(new TKPhong());
+         }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void addChild(JPanel child) {
+        jPanel1.removeAll();
+        jPanel1.add(child);
+        jPanel1.validate();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;

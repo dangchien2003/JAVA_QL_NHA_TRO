@@ -4,6 +4,13 @@
  */
 package thongke;
 
+import com.mycompany.java_qlnt.helper.Helper;
+import com.mycompany.java_qlnt.helper.util;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Admin
@@ -16,6 +23,9 @@ public class TKDoanhThu extends javax.swing.JPanel {
     public TKDoanhThu() {
         initComponents();
     }
+    
+    Helper help = new Helper();
+    util util = new util();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,10 +42,10 @@ public class TKDoanhThu extends javax.swing.JPanel {
         nam = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        doanhThuThang = new javax.swing.JTextField();
+        doanhThuNam = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1303, 468));
@@ -53,18 +63,18 @@ public class TKDoanhThu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Số tầng", "Tên phòng", "Thành tiền"
+                "Số tầng", "Tên phòng", "Giá phòng", "Thành tiền"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel5.setText("Tống doanh thu/năm");
+        label.setText("Tống doanh thu/năm");
 
         jLabel4.setText("Tổng doanh thu/tháng");
 
-        jTextField2.setEditable(false);
+        doanhThuThang.setEditable(false);
 
-        jTextField1.setEditable(false);
+        doanhThuNam.setEditable(false);
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,11 +95,11 @@ public class TKDoanhThu extends javax.swing.JPanel {
                         .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(label))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(doanhThuNam, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(doanhThuThang, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,11 +132,11 @@ public class TKDoanhThu extends javax.swing.JPanel {
                         .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(doanhThuThang, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(label)
+                            .addComponent(doanhThuNam, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(239, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -135,19 +145,83 @@ public class TKDoanhThu extends javax.swing.JPanel {
         // TODO add your handling code here:
         String _thang = thang.getSelectedItem().toString();
         String _nam = nam.getSelectedItem().toString();
+        if(_thang.length() == 1) {
+            _thang = "0"+_thang;
+        }
+        // sql lấy dữ liệu thành tiền 1 tháng của từng phòng
+        String sql = "select  " +
+            "PhongTro.tang, " +
+            "HoaDon.maPhong, " +
+            "ThongTinHopDong.giaPhong, "+
+            "(((soDienMoi-soDienCu)*giaDien) + (giaNuoc*HoaDon.soNguoi) + giaVeSinh + (giaXe*HoaDon.soXe) + giaPhong) as tongTien	 " +
+            "from HoaDon " +
+            "join PhongTro on PhongTro.maPhong = HoaDon.maPhong " +
+            "join ThongTinHopDong on ThongTinHopDong.maHD = PhongTro.maHD " +
+            "where ngayChot LIKE '"
+                + _nam
+                + "-"
+                + _thang
+                + "-%' " +
+            "order by PhongTro.tang;";
+        ResultSet data = help.select(sql);
+        loadDataTable(data);
+        // doanh thu theo tháng
+        sql = "select  " +
+            "sum((((soDienMoi-soDienCu)*giaDien) + (giaNuoc*HoaDon.soNguoi) + giaVeSinh + (giaXe*HoaDon.soXe) + giaPhong)) as doanhThuThang	 " +
+            "from HoaDon " +
+            "join PhongTro on PhongTro.maPhong = HoaDon.maPhong " +
+            "join ThongTinHopDong on ThongTinHopDong.maHD = PhongTro.maHD " +
+            "where ngayChot LIKE '"
+                + _nam
+                + "-"
+                + _thang
+                + "-%' " 
+            + "group by ngayChot";
+        data = help.select(sql);
+        String _doanhThuThang = "";
+        try {
+            while (data.next()) {                
+                _doanhThuThang = data.getString("doanhThuThang");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TKDoanhThu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        doanhThuThang.setText(_doanhThuThang);
+        
+        sql = "select  " +
+            "sum((((soDienMoi-soDienCu)*giaDien) + (giaNuoc*HoaDon.soNguoi) + giaVeSinh + (giaXe*HoaDon.soXe) + giaPhong)) as doanhThuNam	 " +
+            "from HoaDon " +
+            "join PhongTro on PhongTro.maPhong = HoaDon.maPhong " +
+            "join ThongTinHopDong on ThongTinHopDong.maHD = PhongTro.maHD " +
+            "where ngayChot LIKE '"
+                + _nam
+                + "-%' " ;
+        data = help.select(sql);
+        String _doanhThuNam = "";
+        try {
+            while (data.next()) {                
+                _doanhThuNam = data.getString("doanhThuNam");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TKDoanhThu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        doanhThuNam.setText(_doanhThuNam);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void loadDataTable(ResultSet data) {
+        util.loadDataToTable(data, jTable1);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField doanhThuNam;
+    private javax.swing.JTextField doanhThuThang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel label;
     private javax.swing.JComboBox<String> nam;
     private javax.swing.JComboBox<String> thang;
     // End of variables declaration//GEN-END:variables
