@@ -7,6 +7,7 @@ package com.mycompany.java_qlnt.main;
 
 
 
+
 import com.microsoft.sqlserver.jdbc.dataclassification.Label;
 import com.mycompany.java_qlnt.QLPhong.MenuQLP;
 import java.awt.BorderLayout;
@@ -15,7 +16,6 @@ import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import com.mycompany.java_qlnt.QLHopDong.qlhop_dong;
 
 /**
  *
@@ -32,7 +32,7 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         labelClick = jLabel1;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,6 +154,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         panel.setBackground(new java.awt.Color(153, 153, 153));
+        panel.setMaximumSize(new java.awt.Dimension(1304, 468));
         panel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,16 +247,15 @@ public class MainForm extends javax.swing.JFrame {
                 e.setForeground(new Color(48, 40, 40));
         });
         
-        if (labelClick == jLabel1){
+        if(labelClick == jLabel1) {
             showJPanel(new MenuQLP());
-        }else if(labelClick == jLabel8){
-            showJPanel(new qlhop_dong());
         }
+        
     }//GEN-LAST:event_mouseClick_Menu
 
     //mặc định mở đầu hiển thị menuQLP
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        showJPanel(new MenuQLP());
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**
