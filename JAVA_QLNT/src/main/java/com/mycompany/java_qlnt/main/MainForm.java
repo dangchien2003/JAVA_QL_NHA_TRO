@@ -17,6 +17,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import qlkhach_tro.qlkhach_tro;
 
 /**
  *
@@ -251,7 +252,10 @@ public class MainForm extends javax.swing.JFrame {
             showJPanel(new MenuQLP());
         }else if(labelClick == jLabel7) {
             showJPanel(new QuanLiHoaDon());
+        }else if(labelClick == jLabel6) {
+            showJPanel(new qlkhach_tro());
         }
+        
         
     }//GEN-LAST:event_mouseClick_Menu
 
