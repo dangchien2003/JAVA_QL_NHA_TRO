@@ -89,13 +89,8 @@ public final class Phong extends javax.swing.JPanel {
         
         System.out.println(tenPhong); 
         System.out.println(tinhTrangPhong); 
-        if(tenPhong.charAt(0) == 'A' || tenPhong.charAt(0) == 'a') {
-            
-        }else {
-//            Action action = new Action(tenPhong, tinhTrangPhong, soNguoi, soLuongXe);
-            Action action = new Action(Phong.this , tenPhong, tinhTrangPhong, soNguoi, soLuongXe);
-            action.setVisible(true);
-        }
+        Action action = new Action(Phong.this , tenPhong, tinhTrangPhong, soNguoi, soLuongXe);
+        action.setVisible(true);
     }//GEN-LAST:event_clickRoom
     private String tenPhong = "";
     private String tinhTrangPhong = "";
@@ -110,7 +105,7 @@ public final class Phong extends javax.swing.JPanel {
     }
     public void setTinhTrang(String _tinhTrang) {
         this.tinhTrangPhong = _tinhTrang;
-//        setItem();
+        setItem();
     }
     
     public void setItem() {
@@ -125,7 +120,8 @@ public final class Phong extends javax.swing.JPanel {
 //            case "phòng trống" -> this.setBackground(Color.GREEN);
             case "phòng trống" -> bg = new Color(0, 255, 0);
 //            case "đang cọc" -> this.setBackground(Color.YELLOW);
-            case "đang cọc" -> bg = new Color(0, 255, 0);
+            case "đang cọc" -> bg = new Color(255, 255, 0); 
+          
 //            case "sắp hết hợp đồng" -> this.setBackground(Color.ORANGE);
             case "sắp hết hợp đồng" -> bg = new Color(255, 200, 0);
 //            default->this.setBackground(Color.MAGENTA);

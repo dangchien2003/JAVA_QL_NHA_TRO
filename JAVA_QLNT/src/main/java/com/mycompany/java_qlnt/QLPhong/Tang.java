@@ -25,6 +25,8 @@ public class Tang extends javax.swing.JPanel {
     public Tang() {
         System.out.println("Tang"); 
         initComponents();
+        this.setSize(1302, 110);
+        jPanel1.setSize(1302, 110);
         jPanel1.removeAll();
     }
     private final ArrayList<Phong> listRoom = new ArrayList<>();
@@ -40,9 +42,11 @@ public class Tang extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
 
+        setMaximumSize(new java.awt.Dimension(1304, 110));
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1304, 110));
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
     

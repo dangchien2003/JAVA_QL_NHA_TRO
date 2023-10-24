@@ -153,6 +153,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         panel.setBackground(new java.awt.Color(153, 153, 153));
+        panel.setMaximumSize(new java.awt.Dimension(1304, 468));
         panel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
