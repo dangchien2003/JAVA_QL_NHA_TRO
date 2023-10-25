@@ -347,7 +347,6 @@ private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseNa
                 db = getConnect();
                 st = db.createStatement();
                 String sql = "select * from dbo.HoaDon where maPhong = '"+IdRoomTF.getText()+"'";
-                o
 
                 rs = st.executeQuery(sql);
                 DefaultTableModel model = new DefaultTableModel();
