@@ -31,6 +31,8 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         initComponents();
         labelClick = jLabel1;
+        showJPanel(new MenuQLP());
+        
     }
     
     /**
