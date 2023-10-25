@@ -7,7 +7,7 @@ package com.mycompany.java_qlnt.QLPhong;
 import com.mycompany.java_qlnt.QLPhong.ActionRoom.Action;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import static javafx.scene.paint.Color.color;
+//import static javafx.scene.paint.Color.color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;

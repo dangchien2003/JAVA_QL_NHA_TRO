@@ -329,7 +329,7 @@ public class qlhop_dong extends javax.swing.JPanel {
 
         try {
             connect = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-            System.out.println("nt_qlhd.tong.getConnect()");
+            System.out.println("QLHopDong.qlhop_dong.getConnect()");
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -16,7 +16,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import com.mycompany.java_qlnt.QLHopDong.qlhop_dong;
 /**
  *
  * @author chien
@@ -249,6 +249,8 @@ public class MainForm extends javax.swing.JFrame {
         
         if(labelClick == jLabel1) {
             showJPanel(new MenuQLP());
+        } else if (labelClick == jLabel8){
+            showJPanel(new qlhop_dong());
         }
         
     }//GEN-LAST:event_mouseClick_Menu
