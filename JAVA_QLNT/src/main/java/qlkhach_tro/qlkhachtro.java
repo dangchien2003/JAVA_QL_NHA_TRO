@@ -319,7 +319,6 @@ private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseNa
         ExpiresTF.setText("");
        
     }
-
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
         if (IdRoomTF.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Missing input");
@@ -328,8 +327,8 @@ private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseNa
             try {
                 db = getConnect();
                 st = db.createStatement();
-                String sql = "select * from dbo.ThongTinNguoiO where maPhong = "+Integer.valueOf(IdRoomTF.getText());
-
+                String sql = "select * from dbo.ThongTinNguoiO where maPhong = '"+IdRoomTF.getText()+"'";
+                System.out.println(sql); 
                 rs = st.executeQuery(sql);
                 DefaultTableModel model = new DefaultTableModel();
 

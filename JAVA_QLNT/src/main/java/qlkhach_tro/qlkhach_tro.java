@@ -455,7 +455,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
             try {
                 db = getConnect();
                 st = db.createStatement();
-                String sql = "select * from dbo.ThongTinNguoiO where maPhong = " + Integer.valueOf(ma_phong.getText());
+                String sql = "select * from dbo.ThongTinNguoiO where maPhong = '" + ma_phong.getText()+"'";
 
                 rs = st.executeQuery(sql);
                 DefaultTableModel model = new DefaultTableModel();
