@@ -271,11 +271,11 @@ public class QuanLiHoaDon extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=JAVA_QL_NHA_TRO;encrypt=true;trustServerCertificate=true;";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Admin123@";
+    private static final String PASSWORD = "chienkoi123";
     Connection db = null;
     ResultSet rs = null;
     Statement st = null;
-    int tableID;
+    String tableID;
        public Connection getConnect() {
         Connection connect = null;
 
@@ -346,7 +346,8 @@ private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseNa
             try {
                 db = getConnect();
                 st = db.createStatement();
-                String sql = "select * from dbo.HoaDon where maPhong = "+Integer.valueOf(IdRoomTF.getText());
+                String sql = "select * from dbo.HoaDon where maPhong = '"+IdRoomTF.getText()+"'";
+                o
 
                 rs = st.executeQuery(sql);
                 DefaultTableModel model = new DefaultTableModel();
@@ -429,8 +430,8 @@ private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseNa
                     String sql = "update  dbo.HoaDon set maPhong = ?,soDienCu = ?,soDienMoi = ?,soNuocCu = ?, soNuocMoi = ?,soXe = ?,soNguoi = ?,ngayChot = ?,tongTien = ? Where maHoaDon = ? ";
 
                     PreparedStatement pst = db.prepareStatement(sql);
-                    pst.setInt(10, tableID);
-                    pst.setInt(1, Integer.valueOf(IdRoomTF.getText().trim()));
+                    pst.setString(10, tableID);
+                    pst.setString(1, IdRoomTF.getText().trim());
                     pst.setInt(2, Integer.valueOf(NumberElectricOldTF.getText().trim()));
                     pst.setInt(3, Integer.valueOf(NumberElectricNewTF.getText().trim()));
                     pst.setInt(4, Integer.valueOf(NumberWaterOldTF.getText().trim()));
@@ -474,7 +475,7 @@ private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseNa
                     String sql = "Delete from dbo.HoaDon where maHoaDon = ?";
 
                     PreparedStatement pst = db.prepareStatement(sql);
-                    pst.setInt(1, tableID);
+                    pst.setString(1, tableID);
 
                     int rowsInserted = pst.executeUpdate();
 
@@ -497,7 +498,7 @@ private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseNa
     private void ManagerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManagerTableMouseClicked
         DefaultTableModel modal = (DefaultTableModel) ManagerTable.getModel();
         int myIndex = ManagerTable.getSelectedRow();
-        tableID = Integer.valueOf(modal.getValueAt(myIndex, 0).toString());
+        tableID = modal.getValueAt(myIndex, 0).toString();
         IdRoomTF.setText(modal.getValueAt(myIndex, 1).toString());
         NumberElectricOldTF.setText(modal.getValueAt(myIndex, 2).toString());
         NumberElectricNewTF.setText(modal.getValueAt(myIndex, 3).toString());
