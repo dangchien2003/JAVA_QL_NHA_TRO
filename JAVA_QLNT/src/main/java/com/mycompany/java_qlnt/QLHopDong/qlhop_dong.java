@@ -17,7 +17,6 @@ import com.mycompany.java_qlnt.helper.Helper;
 
 public class qlhop_dong extends javax.swing.JPanel {
 
-   
     public qlhop_dong() {
         initComponents();
         showData();
@@ -26,29 +25,31 @@ public class qlhop_dong extends javax.swing.JPanel {
     private static final String DB_URL = "jdbc:sqlserver://localhost;databaseName=JAVA_QL_Nha_Tro;encrypt=true;trustServerCertificate=true";
     private static final String USER = "sa";
     private static final String PASSWORD = "Admin123@";
-            Connection db = null;
-            ResultSet rs = null;
-            Statement st = null;
-            int tableID;
-     
-    public Connection getConnect(){
+    Connection db = null;
+    ResultSet rs = null;
+    Statement st = null;
+    int tableID;
+    String maHDString;
+
+    public Connection getConnect() {
         Connection connect = null;
-        
+
         try {
             connect = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             System.out.println("QLHopDong.qlhop_dong.getConnect()");
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return connect;
     }
-            /*hi*/
-    private void showData(){
+
+    /*hi*/
+    private void showData() {
         try {
             db = getConnect();
             st = db.createStatement();
             rs = st.executeQuery("select * from dbo.ThongTinHopDong");
-            
+
             DefaultTableModel model = (DefaultTableModel) managerTable.getModel();
             model.setRowCount(0);
             int columnCount = model.getColumnCount();
@@ -62,12 +63,12 @@ public class qlhop_dong extends javax.swing.JPanel {
             managerTable.setModel(model);
             rs.close();
             db.close();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    } 
-    
-    private void resetData(){
+    }
+
+    private void resetData() {
         maHD.setText("");
         giaPhong.setText("");
         giaDien.setText("");
@@ -76,9 +77,9 @@ public class qlhop_dong extends javax.swing.JPanel {
         giaXe.setText("");
         thoiGianBatDau.setText("");
         thoiGianHieuLuc.setText("");
-        file.setText("");
+        fileTxt.setText("");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,7 +111,7 @@ public class qlhop_dong extends javax.swing.JPanel {
         giaXe = new javax.swing.JTextField();
         thoiGianBatDau = new javax.swing.JTextField();
         thoiGianHieuLuc = new javax.swing.JTextField();
-        file = new javax.swing.JTextField();
+        fileTxt = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("QUẢN LÍ HỢP ĐỒNG");
@@ -126,10 +127,20 @@ public class qlhop_dong extends javax.swing.JPanel {
                 "Mã hợp đồng", "Giá phòng", "Giá điện", "Giá nước", "Giá vệ sinh", "Giá xe", "Thời gian bắt đầu", "Thời gian hiệu lực", "File"
             }
         ));
+        managerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                managerTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(managerTable);
 
         searchHD.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         searchHD.setText("Tìm kiếm ");
+        searchHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchHDActionPerformed(evt);
+            }
+        });
 
         addHD.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         addHD.setText("Thêm hợp đồng");
@@ -208,7 +219,7 @@ public class qlhop_dong extends javax.swing.JPanel {
 
         thoiGianHieuLuc.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
-        file.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        fileTxt.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -265,7 +276,7 @@ public class qlhop_dong extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(file))
+                        .addComponent(fileTxt))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -318,7 +329,7 @@ public class qlhop_dong extends javax.swing.JPanel {
                             .addComponent(jLabel6)
                             .addComponent(jLabel10)
                             .addComponent(giaVeSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(file, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(fileTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -342,32 +353,34 @@ public class qlhop_dong extends javax.swing.JPanel {
 
     private void addHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHDActionPerformed
         // TODO add your handling code here:
-        if (maHD.getText().isEmpty() || giaPhong.getText().isEmpty() || giaDien.getText().isEmpty() || giaNuoc.getText().isEmpty() || giaVeSinh.getText().isEmpty() || giaXe.getText().isEmpty() || thoiGianBatDau.getText().isEmpty() || thoiGianHieuLuc.getText().isEmpty() || file.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this,"Missing input");
+        if (maHD.getText().isEmpty() || giaPhong.getText().isEmpty() || giaDien.getText().isEmpty() || giaNuoc.getText().isEmpty() || giaVeSinh.getText().isEmpty() || giaXe.getText().isEmpty() || thoiGianBatDau.getText().isEmpty() || thoiGianHieuLuc.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Missing input");
         } else {
-            try{
+            try {
                 db = getConnect();
-                if(db != null){
-                    String sql = "INSERT INTO dbo.ThongTinHopDong (maHD, giaPhong, giaDien, giaNuoc, giaVeSinh, giaXe, thoiGianBatDau, thoiGianHieuLuc, file) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                if (db != null) {
+                    String sql = "INSERT INTO dbo.ThongTinHopDong  values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement pst = db.prepareStatement(sql);
-                    pst.setString(1, maHD.getText());
+                    pst.setString(1, maHD.getText().toString() + "");
                     pst.setInt(2, Integer.valueOf(giaPhong.getText()));
                     pst.setInt(3, Integer.valueOf(giaDien.getText()));
                     pst.setInt(4, Integer.valueOf(giaNuoc.getText()));
                     pst.setInt(5, Integer.valueOf(giaVeSinh.getText()));
                     pst.setInt(6, Integer.valueOf(giaXe.getText()));
                     pst.setString(7, thoiGianBatDau.getText());
-                    pst.setInt(8, Integer.valueOf(thoiGianHieuLuc.getText()));
-                    pst.setString(9, file.getText());
+                    pst.setInt(8, Integer.valueOf(thoiGianHieuLuc.getText().trim()));
+                    pst.setString(9, fileTxt.getText());
+
+//                    pst.setString(9, file.getText());
                     int rowsInserted = pst.executeUpdate();
-                    JOptionPane.showMessageDialog(this,"Added HopDong");
+                    JOptionPane.showMessageDialog(this, "Added HopDong");
                 } else {
                     System.out.println("Failed to connect tho the database!");
                 }
                 db.close();
                 showData();
                 resetData();
-            } catch(SQLException e){
+            } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
@@ -375,25 +388,25 @@ public class qlhop_dong extends javax.swing.JPanel {
 
     private void editHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editHDActionPerformed
         // TODO add your handling code here:
-         if (maHD.getText().isEmpty() || giaPhong.getText().isEmpty() || giaDien.getText().isEmpty() || giaNuoc.getText().isEmpty() || giaVeSinh.getText().isEmpty() || giaXe.getText().isEmpty() || thoiGianBatDau.getText().isEmpty() || thoiGianHieuLuc.getText().isEmpty() || file.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this,"Missing input");
+        if (maHD.getText().isEmpty() || giaPhong.getText().isEmpty() || giaDien.getText().isEmpty() || giaNuoc.getText().isEmpty() || giaVeSinh.getText().isEmpty() || giaXe.getText().isEmpty() || thoiGianBatDau.getText().isEmpty() || thoiGianHieuLuc.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Missing input");
         } else {
-            try{
+            try {
                 db = getConnect();
-                if(db != null){
-                    String sql = "update dbo.ThongTinHopDong set maHD = ?, goiaPhong = ?, giaDien = ?, giaNuoc = ?, giaVeSinh = ?, giaXe = ?, thoiGianBatDau = ?, thoiGianHiruLuc = ?, file = ? where maHD = ?";
+                if (db != null) {
+                    String sql = "update dbo.ThongTinHopDong set  giaPhong = ?, giaDien = ?, giaNuoc = ?, giaVeSinh = ?, giaXe = ?, thoiGianBatDau = ?, thoiGianHieuLuc = ?  where maHD = ?";
                     PreparedStatement pst = db.prepareStatement(sql);
-                    pst.setInt(10, tableID);
-                    pst.setString(1, maHD.getText().trim());
-                    pst.setInt(2, Integer.valueOf(giaPhong.getText().trim()));
-                    pst.setInt(3, Integer.valueOf(giaDien.getText().trim()));
-                    pst.setInt(4, Integer.valueOf(giaNuoc.getText().trim()));
-                    pst.setInt(5, Integer.valueOf(giaVeSinh.getText().trim()));
-                    pst.setInt(6, Integer.valueOf(giaXe.getText().trim()));
-                    pst.setString(7, thoiGianBatDau.getText().trim());
-                    pst.setInt(8, Integer.valueOf(thoiGianHieuLuc.getText().trim()));
-                    pst.setString(9, file.getText().trim());
-                    System.out.println("sql" + sql);
+                    pst.setString(8, maHDString);
+//                    pst.setString(1, maHD.getText().trim());
+                    pst.setInt(1, Integer.valueOf(giaPhong.getText().trim()));
+                    pst.setInt(2, Integer.valueOf(giaDien.getText().trim()));
+                    pst.setInt(3, Integer.valueOf(giaNuoc.getText().trim()));
+                    pst.setInt(4, Integer.valueOf(giaVeSinh.getText().trim()));
+                    pst.setInt(5, Integer.valueOf(giaXe.getText().trim()));
+                    pst.setString(6, thoiGianBatDau.getText().trim());
+                    pst.setInt(7, Integer.valueOf(thoiGianHieuLuc.getText().trim()));
+
+//                    pst.setString(9, file.getText().trim());
                     int rowsInserted = pst.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Update HopDong");
                 } else {
@@ -402,23 +415,23 @@ public class qlhop_dong extends javax.swing.JPanel {
                 db.close();
                 showData();
                 resetData();
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, e);
             }
-         }
+        }
     }//GEN-LAST:event_editHDActionPerformed
 
     private void deleteHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteHDActionPerformed
         // TODO add your handling code here:
-        if (maHD.getText().isEmpty() || giaPhong.getText().isEmpty() || giaDien.getText().isEmpty() || giaNuoc.getText().isEmpty() || giaVeSinh.getText().isEmpty() || giaXe.getText().isEmpty() || thoiGianBatDau.getText().isEmpty() || thoiGianHieuLuc.getText().isEmpty() || file.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this,"Missing input");
+        if (maHD.getText().isEmpty() || giaPhong.getText().isEmpty() || giaDien.getText().isEmpty() || giaNuoc.getText().isEmpty() || giaVeSinh.getText().isEmpty() || giaXe.getText().isEmpty() || thoiGianBatDau.getText().isEmpty() || thoiGianHieuLuc.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Missing input");
         } else {
-            try{
+            try {
                 db = getConnect();
-                if(db != null){
+                if (db != null) {
                     String sql = "Delete from dbo.ThongTinHopDong where maHD = ?";
                     PreparedStatement pst = db.prepareStatement(sql);
-                    pst.setInt(1, tableID);
+                    pst.setString(1, maHDString);
                     int rowsInserted = pst.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Delete HopDong");
                 } else {
@@ -427,7 +440,7 @@ public class qlhop_dong extends javax.swing.JPanel {
                 db.close();
                 showData();
                 resetData();
-            } catch(SQLException e){
+            } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
@@ -439,41 +452,58 @@ public class qlhop_dong extends javax.swing.JPanel {
         resetData();
     }//GEN-LAST:event_editnewHDActionPerformed
 
-    private void searchHDActionPerformed(java.awt.event.ActionEvent evt){
-        if (maHD.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Missing input");
-        } else {
-            try{
-                db = getConnect();
-                st = db.createStatement();
-                String sql = "select * from dbo.ThongTinHopDong where maHD = " + Integer.valueOf(maHD.getText());
-                rs = st.executeQuery(sql);
-                DefaultTableModel model = new DefaultTableModel();
-                ResultSetMetaData metaData = rs.getMetaData();
-                int columnCount = metaData.getColumnCount();
-                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
-                    model.addColumn(metaData.getColumnLabel(columnIndex));
-                }
-                while(rs.next()){
-                    Object[] row = new Object [columnCount];
-                    for(int i = 0; i < columnCount; i++){
-                        row[i] = rs.getObject(i+1);
-                    } 
-                    model.addRow(row);
-                }
-                managerTable.setModel(model);
-                rs.close();
-                db.close();
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    private void managerTableMouseClicked(){
+    private void managerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managerTableMouseClicked
         DefaultTableModel modal = (DefaultTableModel) managerTable.getModel();
         int myIndex = managerTable.getSelectedRow();
-        tableID = Integer.parseInt(modal.getValueAt(myIndex, 0).toString());
+        tableID = managerTable.rowAtPoint(evt.getPoint());
+        maHDString = modal.getValueAt(myIndex, 0).toString();
+        maHD.setText(modal.getValueAt(myIndex, 0).toString());
+        giaPhong.setText(modal.getValueAt(myIndex, 1).toString());
+        giaDien.setText(modal.getValueAt(myIndex, 2).toString());
+        giaNuoc.setText(modal.getValueAt(myIndex, 3).toString());
+        giaVeSinh.setText(modal.getValueAt(myIndex, 4).toString());
+        giaXe.setText(modal.getValueAt(myIndex, 5).toString());
+        thoiGianBatDau.setText(modal.getValueAt(myIndex, 6).toString());
+        thoiGianHieuLuc.setText(modal.getValueAt(myIndex, 7).toString());
+        fileTxt.setText(modal.getValueAt(myIndex, 8).toString());
+    }//GEN-LAST:event_managerTableMouseClicked
+
+    private void searchHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHDActionPerformed
+      
+     if (maHD.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Missing input");
+        } else {
+             try {
+            db = getConnect();
+            st = db.createStatement();
+            rs = st.executeQuery("select * from dbo.ThongTinHopDong where  maHD like '%"+maHD.getText().trim() +"%'" );
+
+            DefaultTableModel model = (DefaultTableModel) managerTable.getModel();
+            model.setRowCount(0);
+            int columnCount = model.getColumnCount();
+            while (rs.next()) {
+                Object[] row = new Object[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                model.addRow(row);
+            }
+            managerTable.setModel(model);
+            rs.close();
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+    }//GEN-LAST:event_searchHDActionPerformed
+
+
+
+    private void managerTableMouseClicked() {
+        DefaultTableModel modal = (DefaultTableModel) managerTable.getModel();
+        int myIndex = managerTable.getSelectedRow();
+        tableID = Integer.valueOf(modal.getValueAt(myIndex, 0).toString());
+        System.out.println("com.mycompany.java_qlnt.QLHopDong.qlhop_dong.managerTableMouseClicked() ::" + tableID);
         maHD.setText(modal.getValueAt(myIndex, 1).toString());
         giaPhong.setText(modal.getValueAt(myIndex, 2).toString());
         giaDien.setText(modal.getValueAt(myIndex, 3).toString());
@@ -482,12 +512,12 @@ public class qlhop_dong extends javax.swing.JPanel {
         giaXe.setText(modal.getValueAt(myIndex, 6).toString());
         thoiGianBatDau.setText(modal.getValueAt(myIndex, 7).toString());
         thoiGianHieuLuc.setText(modal.getValueAt(myIndex, 8).toString());
-        file.setText(modal.getValueAt(myIndex, 9).toString());
+        fileTxt.setText(modal.getValueAt(myIndex, 9).toString());
     }
-    
-    public static void main(String args[]){
-        java.awt.EventQueue.invokeLater(new Runnable(){
-            public void run(){
+
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new qlhop_dong().setVisible(true);
             }
         });
@@ -498,7 +528,7 @@ public class qlhop_dong extends javax.swing.JPanel {
     private javax.swing.JButton deleteHD;
     private javax.swing.JButton editHD;
     private javax.swing.JButton editnewHD;
-    private javax.swing.JTextField file;
+    private javax.swing.JTextField fileTxt;
     private javax.swing.JTextField giaDien;
     private javax.swing.JTextField giaNuoc;
     private javax.swing.JTextField giaPhong;

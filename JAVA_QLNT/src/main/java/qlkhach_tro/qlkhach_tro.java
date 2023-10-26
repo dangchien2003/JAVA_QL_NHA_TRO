@@ -24,7 +24,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
 
     private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=JAVA_QL_NHA_TRO;encrypt=true;trustServerCertificate=true;";
     private static final String USER = "sa";
-    private static final String PASSWORD = "chienkoi123";
+    private static final String PASSWORD = "Admin123@";
     Connection db = null;
 
     ResultSet rs = null;
@@ -384,7 +384,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
             try {
                 db = getConnect();
                 if (db != null) {
-                    String sql = "UPDATE dbo.ThongTinNguoiO SET maPhong = ?, hoTen=?, namSinh=?, sdt=?,soCCCD=?, bienSoXe=?, tenXe=?, queQuan=? where idNo = ?";
+                    String sql = "UPDATE dbo.ThongTinNguoiO SET maPhong = ?, hoTen=?, namSinh=?, sdt=?,soCCCD=?, bienSoXe=?, tenXe=?, queQuan=? where inNo = ?";
 
                     PreparedStatement pst = db.prepareStatement(sql);
                     pst.setString(1, ma_phong.getText());
@@ -423,7 +423,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
             try {
                 db = getConnect();
                 if (db != null) {
-                    String sql = "Delete from dbo.ThongTinNguoiO where idNo = ?";
+                    String sql = "Delete from dbo.ThongTinNguoiO where inNo = ?";
 
                     PreparedStatement pst = db.prepareStatement(sql);
                     pst.setInt(1, tableID);

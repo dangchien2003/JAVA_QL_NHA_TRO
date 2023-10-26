@@ -271,7 +271,7 @@ public class QuanLiHoaDon extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=JAVA_QL_NHA_TRO;encrypt=true;trustServerCertificate=true;";
     private static final String USER = "sa";
-    private static final String PASSWORD = "chienkoi123";
+    private static final String PASSWORD = "Admin123@";
     Connection db = null;
     ResultSet rs = null;
     Statement st = null;

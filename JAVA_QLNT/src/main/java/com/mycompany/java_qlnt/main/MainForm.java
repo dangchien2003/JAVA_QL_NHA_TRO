@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import qlkhach_tro.qlkhach_tro;
 import thongke.QuanLyThongKe;
+import com.mycompany.java_qlnt.QLHopDong.qlhop_dong;
 
 /**
  *
@@ -260,6 +261,8 @@ public class MainForm extends javax.swing.JFrame {
             showJPanel(new qlkhach_tro());
         }else if(labelClick == jLabel10) {
             showJPanel(new QuanLyThongKe());
+        }else if(labelClick == jLabel8) {
+            showJPanel(new qlhop_dong());
         }
         
         
