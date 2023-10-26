@@ -19,7 +19,23 @@ import java.sql.Types;
  *
  * @author chien
  */
-public class Helper {
+
+
+interface edit{
+    int edit(String query) ;
+}
+
+interface select {
+    ResultSet select(String query);
+}
+
+
+interface query {
+    Object query(String query);
+}
+
+
+class conn {
     private boolean checkpath(String Stringconnection) {
         File file = new File(Stringconnection);
 
@@ -39,10 +55,10 @@ public class Helper {
         }
         return true;
     }
-    private String getStringConnection() {
+    private String getStringConnection(String filePath) {
         String Stringconnection= "";
         // Đường dẫn đến file văn bản bạn muốn đọc
-        String filePath = "src\\main\\java\\com\\mycompany\\java_qlnt\\helper\\StringConnection.txt";
+//        String filePath = "src\\main\\java\\com\\mycompany\\java_qlnt\\helper\\StringConnection.txt";
         checkpath(filePath);
 
         // Sử dụng try-with-resources để đảm bảo tài nguyên được đóng tự động
@@ -62,8 +78,8 @@ public class Helper {
     }
     
    
-    private Connection getConnection() {
-        String url = getStringConnection();
+    protected Connection getConnection(String filePath) {
+        String url = getStringConnection(filePath);
         try{
             Connection conn = DriverManager.getConnection(url);
             return conn;
@@ -74,9 +90,20 @@ public class Helper {
             return null;
         }
     }
+}
+
+
+abstract class sql extends conn{
+    protected ResultSet select(String query, Statement stmt) {
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
     
-    
-    private int edit(String query, Statement stmt) {
+    protected int edit(String query, Statement stmt) {
         try {
             int rowsAffected = stmt.executeUpdate(query);
             return rowsAffected;
@@ -84,11 +111,18 @@ public class Helper {
             return 0;
         }
     }
+     
+    public abstract Object query(String query);
     
+}
+
+
+public class Helper extends sql implements edit, query {
+    private String filePath = "src\\main\\java\\com\\mycompany\\java_qlnt\\helper\\StringConnection.txt";
     
     public int edit(String query) {
         try {
-            Connection conn = getConnection();
+            Connection conn = getConnection(filePath);
             Statement stmt = conn.createStatement();
             int rowsAffected = stmt.executeUpdate(query);
             return rowsAffected;
@@ -100,19 +134,11 @@ public class Helper {
         
     }
     
-    
-    private ResultSet select(String query, Statement stmt) {
-        try {
-            ResultSet rs = stmt.executeQuery(query);
-            return rs;
-        } catch (SQLException ex) {
-            return null;
-        }
-    }
+
     
     public ResultSet select(String query) {
         try {
-            Connection conn = getConnection();
+            Connection conn = getConnection(filePath);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             return rs;
@@ -121,9 +147,11 @@ public class Helper {
         }
     }
     
+    
+    //abstract sql
     public Object query(String query) {
         try{
-            Connection conn = getConnection();
+            Connection conn = getConnection(filePath);
             Statement stmt = conn.createStatement();
             String headQuery = query.trim().substring(0,10);
             String[] arrSplitQuery = headQuery.split(" ");
@@ -137,33 +165,4 @@ public class Helper {
             return null;
         }
     } 
-    
-//    public boolean update(String nameProcedure) {
-//        boolean query = false;
-//        try {
-//            Connection conn = getConnection();
-//            CallableStatement callableStatement = conn.prepareCall("{call "+nameProcedure+"()}");
-//
-//            // Đặt giá trị cho tham số đầu vào
-//            callableStatement.setInt(1, 5);
-//            callableStatement.setInt(2, 4);
-//
-//            // Đăng ký tham số đầu ra
-//            callableStatement.registerOutParameter(1, Types.INTEGER);
-//
-//            // Thực hiện stored procedure
-//            callableStatement.execute();
-//
-//            // Lấy giá trị trả về từ stored procedure
-//            int result = callableStatement.getInt(1);
-//            System.out.println("Kết quả từ stored procedure: " + result);
-//
-//            // Đóng các tài nguyên
-//            callableStatement.close();
-//            conn.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return query;
-//    }
 }
