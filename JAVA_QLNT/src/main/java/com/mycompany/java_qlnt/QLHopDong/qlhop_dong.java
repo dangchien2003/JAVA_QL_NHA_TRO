@@ -42,7 +42,7 @@ public class qlhop_dong extends javax.swing.JPanel {
         }
         return connect;
     }
-            
+            /*hi*/
     private void showData(){
         try {
             db = getConnect();
