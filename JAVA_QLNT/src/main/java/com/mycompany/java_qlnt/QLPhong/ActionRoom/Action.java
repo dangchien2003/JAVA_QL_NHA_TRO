@@ -590,8 +590,14 @@ public class Action extends javax.swing.JFrame {
             deleteDataRoom();
             setMethodPerSon(values);
         }else if(tinhTrangPhong.toLowerCase().equals("sắp hết hợp đồng")) {
-            String sql = "update PhongTro set tinhTrang = '"+values.get("tinhTrang")+"' where maPhong = '"+maPhong+"'";
-            room.setTinhTrang(values.get("tinhTrang"));
+            String sql = "update PhongTro set tinhTrang = N'"+values.get("tinhTrang")+"' where maPhong = '"+maPhong+"'";
+            int rowaf = help.edit(sql);
+            if(rowaf == 1) {
+                room.setTinhTrang(values.get("tinhTrang"));
+            }else {
+                jOptionPane1.showMessageDialog(null, "Cập nhậtthất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
     }//GEN-LAST:event_SaveInfoRoom
 

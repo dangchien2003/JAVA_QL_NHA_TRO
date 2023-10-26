@@ -43,9 +43,9 @@ public class Main {
     
     
     public static void main(String[] args) {
-//        DangNhap mainform = new DangNhap();
-//        mainform.main(args);
-        MainForm mainform = new MainForm();
+        DangNhap mainform = new DangNhap();
         mainform.main(args);
+//        MainForm mainform = new MainForm();
+//        mainform.main(args);
     }
 }

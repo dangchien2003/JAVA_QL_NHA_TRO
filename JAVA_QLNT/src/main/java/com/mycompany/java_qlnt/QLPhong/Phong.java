@@ -112,7 +112,6 @@ public final class Phong extends javax.swing.JPanel {
         TenPhong.setText(tenPhong);
         TinhTrangHienTai.setText(tinhTrangPhong);
         Color bg;
-        System.out.println(tinhTrangPhong); 
         switch(tinhTrangPhong.toLowerCase()) {
             
 //            case "đang sử dụng" -> this.setBackground();
