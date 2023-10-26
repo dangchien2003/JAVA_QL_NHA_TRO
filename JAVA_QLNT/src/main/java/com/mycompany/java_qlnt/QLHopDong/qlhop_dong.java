@@ -465,7 +465,8 @@ public class qlhop_dong extends javax.swing.JPanel {
         giaXe.setText(modal.getValueAt(myIndex, 5).toString());
         thoiGianBatDau.setText(modal.getValueAt(myIndex, 6).toString());
         thoiGianHieuLuc.setText(modal.getValueAt(myIndex, 7).toString());
-        fileTxt.setText(modal.getValueAt(myIndex, 8).toString());
+        
+        fileTxt.setText(modal.getValueAt(myIndex, 8) != null?modal.getValueAt(myIndex, 8).toString() : "");
     }//GEN-LAST:event_managerTableMouseClicked
 
     private void searchHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHDActionPerformed
