@@ -24,7 +24,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
 
     private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=JAVA_QL_NHA_TRO;encrypt=true;trustServerCertificate=true;";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Admin123@";
+    private static final String PASSWORD = "chienkoi123";
     Connection db = null;
 
     ResultSet rs = null;

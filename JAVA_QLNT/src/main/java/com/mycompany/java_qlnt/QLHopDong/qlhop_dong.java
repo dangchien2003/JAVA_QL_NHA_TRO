@@ -24,7 +24,7 @@ public class qlhop_dong extends javax.swing.JPanel {
 
     private static final String DB_URL = "jdbc:sqlserver://localhost;databaseName=JAVA_QL_Nha_Tro;encrypt=true;trustServerCertificate=true";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Admin123@";
+    private static final String PASSWORD = "chienkoi123";
     Connection db = null;
     ResultSet rs = null;
     Statement st = null;
