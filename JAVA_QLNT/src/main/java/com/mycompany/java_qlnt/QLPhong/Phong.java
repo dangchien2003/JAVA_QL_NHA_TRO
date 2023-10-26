@@ -105,6 +105,7 @@ public final class Phong extends javax.swing.JPanel {
     }
     public void setTinhTrang(String _tinhTrang) {
         this.tinhTrangPhong = _tinhTrang;
+        System.out.println(this.tinhTrangPhong); 
         setItem();
     }
     

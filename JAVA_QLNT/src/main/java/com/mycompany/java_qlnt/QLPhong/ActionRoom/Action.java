@@ -83,6 +83,7 @@ public class Action extends javax.swing.JFrame {
                 setInput(false);
             }
             case "ĐANG CỌC" -> tinhTrang.setSelectedIndex(2);
+            case "SẮP HẾT HỢP ĐỒNG" -> tinhTrang.setSelectedIndex(3);
             
         }
     }
