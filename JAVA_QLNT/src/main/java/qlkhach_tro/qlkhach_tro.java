@@ -384,7 +384,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
             try {
                 db = getConnect();
                 if (db != null) {
-                    String sql = "UPDATE dbo.ThongTinNguoiO SET maPhong = ?, hoTen=?, namSinh=?, sdt=?,soCCCD=?, bienSoXe=?, tenXe=?, queQuan=? where inNo = ?";
+                    String sql = "UPDATE dbo.ThongTinNguoiO SET maPhong = ?, hoTen=?, namSinh=?, sdt=?,soCCCD=?, bienSoXe=?, tenXe=?, queQuan=? where idNO = ?";
 
                     PreparedStatement pst = db.prepareStatement(sql);
                     pst.setString(1, ma_phong.getText());
@@ -423,7 +423,7 @@ public class qlkhach_tro extends javax.swing.JPanel {
             try {
                 db = getConnect();
                 if (db != null) {
-                    String sql = "Delete from dbo.ThongTinNguoiO where inNo = ?";
+                    String sql = "Delete from dbo.ThongTinNguoiO where idNO = ?";
 
                     PreparedStatement pst = db.prepareStatement(sql);
                     pst.setInt(1, tableID);

@@ -217,7 +217,7 @@ public class ActionRoom extends javax.swing.JPanel {
         if(_tang > 0 && !"".equals(_maPhong.trim())) {
             sql = "select maPhong, tang, tinhTrang from PhongTro where maPhong = '"
             + _maPhong
-            + "', tang = "
+            + "'and tang = "
             + _tang;
         }else if( !"".equals(_maPhong.trim())) {
             sql = "select maPhong, tang, tinhTrang from PhongTro where maPhong = '"
